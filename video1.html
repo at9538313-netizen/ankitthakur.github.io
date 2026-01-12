@@ -1,0 +1,190 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Full Course</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #F2F2F2;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 { color: #222; }
+
+.thumbnail {
+    width: 100%;
+    max-width: 560px;
+    border-radius: 14px;
+    margin: 20px auto;
+    transition: 0.3s;
+}
+.thumbnail:hover { transform: scale(1.03); }
+
+.card {
+    background: #FFFFFF;
+    max-width: 560px;
+    margin: 25px auto;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.price-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: 5888;
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.new-price {
+    font-size: 28px;
+    color: #28A745;
+    font-weight: bold;
+}
+
+.discount {
+    color: #FF7A18;
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    
+    
+
+/* Buy Now */
+.buy-btn {
+    background: linear-gradient(45deg, #FF7A18, #FFB347);
+    color: white;
+    box-shadow: 0 8px 20px rgba(255, 122, 24, 0.5);
+}
+.buy-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Watch + Back */
+.red-btn {
+    background: #FF0000;
+    color: white;
+}
+.red-btn:hover {
+    width: 70%;
+    background: #CC0000;
+}
+/* Locked message */
+.lock {
+    color: #cc0000;
+    font-weight: bold;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Trading Full Course</h1>
+<p>Learn full trading with our beginner-friendly course 📈</p>
+
+<img class="thumbnail" src="https://img.youtube.com/vi/8liEuoJA_gc/maxresdefault.jpg">
+
+<div class="card" id="priceCard">
+    <div class="price-title">Course Price</div>
+    <div>
+        <span class="old-price">₹50</span>
+        <span class="new-price">FREE</span>
+    </div>
+    <div class="discount">🎉 Limited Time FREE Offer!</div>
+
+    <button class="btn buy-btn" id="buyBtn" onclick="buyCourse()">Buy Now For FREE</button>
+    <p class="lock" id="lockText">Login & Unlock this course 🔒</p>
+</div>
+
+<!-- Hidden until buy -->
+<a id="watchBtn" class="btn red-btn" href="https://youtu.be/8liEuoJA_gc" target="_blank" style="display:none;">
+Watch on YouTube
+</a>
+
+<a class="btn red-btn" href="index.html">Back to Home</a>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCl0k3tOjj27o3cQNumqBJprsjYKIn97ck",
+  authDomain: "my-login-app-e9289.firebaseapp.com",
+  projectId: "my-login-app-e9289",
+  storageBucket: "my-login-app-e9289.firebasestorage.app",
+  messagingSenderId: "29241892380",
+  appId: "1:29241892380:web:b856e2811ce690a6d009d9"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+let userEmail = null;
+
+/* Check if logged in */
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        userEmail = user.email.replace(/\./g, "_");
+
+        // check if already bought
+        if (localStorage.getItem("course_trading_" + userEmail) === "true") {
+            unlockCourse();
+        }
+    }
+});
+
+window.buyCourse = function() {
+    if (!auth.currentUser) {
+        // Not logged in → go to login page
+        window.location.href = "login.html";
+        return;
+    }
+
+    // Logged in → allow purchase
+    localStorage.setItem("course_trading_" + userEmail, "true");
+    unlockCourse();
+};
+
+function unlockCourse() {
+    document.getElementById("watchBtn").style.display = "block";
+    document.getElementById("lockText").innerHTML = "✅ Course unlocked for your account!";
+    document.getElementById("priceCard").style.display = "none";
+}
+    
+    
+    const user = auth.currentUser;
+let purchases = JSON.parse(localStorage.getItem("purchase_"+user.uid) || "[]");
+
+if(!purchases.includes("Trading Course")){
+   purchases.push("Trading Course");
+   localStorage.setItem("purchase_"+user.uid, JSON.stringify(purchases));
+}
+</script>
+
+</body>
+</html>

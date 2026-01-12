@@ -1,0 +1,190 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard - My Courses</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+    margin:0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background:#F2F2F2;
+}
+
+/* HEADER */
+.header {
+    background:#0F172A;
+    color:white;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header h2 {
+    margin:0;
+}
+
+.logout-btn {
+    background:#FF0000;
+    color:white;
+    border:none;
+    padding:8px 15px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* WELCOME */
+.welcome {
+    text-align:center;
+    margin:40px 20px 10px;
+}
+
+.welcome h1 {
+    font-size:28px;
+}
+
+/* COURSE GRID */
+.course-container {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    margin:30px 20px;
+}
+
+.course-card {
+    background:white;
+    width:300px;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 15px 30px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.course-card:hover {
+    transform:translateY(-5px);
+}
+
+.course-img {
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.course-content {
+    padding:15px;
+}
+
+.course-title {
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.course-desc {
+    font-size:14px;
+    color:#555;
+}
+
+.open-btn {
+    display:block;
+    margin-top:12px;
+    text-align:center;
+    padding:10px;
+    background:linear-gradient(to right,#FF7A18,#FFB347);
+    color:white;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>📚 My Dashboard</h2>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<div class="welcome">
+  <h1>Welcome 🎉</h1>
+  <p>You are logged in successfully</p>
+</div>
+
+<div class="course-container" id="courses"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCl0k3tOjj27o3cQNumqBJprsjYKIn97ck",
+  authDomain: "my-login-app-e9289.firebaseapp.com",
+  projectId: "my-login-app-e9289"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const emailKey = user.email.replace(/\./g,"_");
+  const container = document.getElementById("courses");
+
+  if (localStorage.getItem("course_trading_" + emailKey) === "true") {
+    container.innerHTML = `
+      <div class="course-card">
+        <img class="course-img" src="https://img.youtube.com/vi/8liEuoJA_gc/maxresdefault.jpg">
+        <div class="course-content">
+          <div class="course-title">Trading Full Course</div>
+          <div class="course-desc">Learn trading from zero to advanced level.</div>
+          <a class="open-btn" href="video1.html">Open Course</a>
+        </div>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `
+      <div class="course-card">
+        <div class="course-content">
+          <div class="course-title">No Courses Purchased</div>
+          <div class="course-desc">You haven’t bought any course yet.</div>
+          <a class="open-btn" href="course.html">Browse Courses</a>
+        </div>
+      </div>
+    `;
+  }
+});
+
+window.logout = () => {
+  signOut(auth).then(()=>window.location.href="index.html");
+}
+</script>
+    <a href="index.html" class="back-home">⬅ Back to Home</a>
+
+    <style>
+    /* Back button */
+        .back-home {
+            display: block;
+            width: fit-content;
+            margin: 30px auto;
+            padding: 10px 18px;
+            background: white;
+            color: #764ba2;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+    </style>
+    
+</body>
+</html>

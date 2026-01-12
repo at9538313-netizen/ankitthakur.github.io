@@ -1,0 +1,91 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Courses</title>
+    <link rel="stylesheet" href="style.css">
+  <style>.course-page {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    flex-wrap: wrap;
+}
+
+.course-card {
+    background: #ffffff;
+    width: 260px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+}
+  .course {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+  </style>
+</head>
+<body>
+
+
+
+<h1 style="text-align:center; margin-top:30px;">Our Courses</h1>
+
+
+<div class="courses-container">
+
+  <div class="course-card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt3jLluNQrgC9UASLbBqfLZXbQcLTGYO7hNteC0lMW_Q&s=10">
+    <h3>Web Development</h3>
+    <p>Learn HTML, CSS, JS</p>
+    <span class="price">FREE</span>
+    <a href="video2.html"><button class="btn">Watch Now</button></a>
+  </div>
+
+  <div class="course-card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFo32XI2XPqXA-nOyv6-cpd4nHPoqCqdb6-DXJdmgGxvvxoCZlS-IZzcAJ&s=10">
+    <h3>Trading Course</h3>
+    <p>Learn Trading skills</p>
+    <span class="price">🎉 Limited Time FREE Offer</span>
+    <a href="video1.html"><button class="btn">Buy Now for FREE</button></a>
+  </div>
+
+</div>
+  
+  <a href="index.html" class="back-home">Back to Home</a>
+  <style>.back-home {
+    display: inline-block;
+    margin: 20px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #4facfe, #00c6fb);
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.back-home:hover {
+    background: linear-gradient(135deg, #00c6fb, #4facfe);
+    transform: scale(1.05);
+}
+    
+  .back-home {
+    display: block;
+    width: fit-content;
+    margin: 30px auto;
+}
+  </style>
+</body>
+</html>

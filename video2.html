@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Development Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .thumbnail {
+            width: 100%;
+            max-width: 560px;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 20px auto;
+            transition: transform 0.3s;
+        }
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Web Development Full Course</h1>
+    <p>Click the thumbnail below to watch the video on YouTube:</p>
+
+    <!-- Thumbnail image linking to YouTube video -->
+    <a href="https://youtu.be/F4zr1aMevB4" target="_blank">
+        <img class="thumbnail" src="https://img.youtube.com/vi/F4zr1aMevB4/maxresdefault.jpg" alt="Web Development Full Course">
+    </a>
+
+    <div>
+        <!-- Watch on YouTube Button -->
+        <a class="button" href="https://youtu.be/F4zr1aMevB4" target="_blank">Watch on YouTube</a>
+        <!-- Back to Home Button -->
+        <a class="button" href="index.html">Back to Home</a>
+    </div>
+
+</body>
+</html>
